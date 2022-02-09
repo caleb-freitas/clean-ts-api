@@ -12,5 +12,7 @@ describe("SignUp Controller", () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
+    // toEqual() compare values, not pointers
+    expect(httpResponse.body).toEqual(new Error("missing param: name"));
   });
 });
