@@ -1,24 +1,24 @@
 {
   "env": {
-      "es2020": true,
-      "node": true,
-      "jest": true
+    "es2020": true,
+    "node": true,
+    "jest": true
   },
   "extends": [
-      "airbnb-base",
-      "plugin:@typescript-eslint/recommended",
-      "prettier",
-      "plugin:prettier/recommended"
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-      "ecmaVersion": 12,
-      "sourceType": "module"
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
   "plugins": [
-      "@typescript-eslint",
-      "eslint-plugin-import-helpers",
-      "prettier"
+    "@typescript-eslint",
+    "eslint-plugin-import-helpers",
+    "prettier"
   ],
   "rules": {
     "camelcase": "off",
@@ -27,7 +27,9 @@
       "error",
       {
         "selector": "interface",
-        "format": ["PascalCase"],
+        "format": [
+          "PascalCase"
+        ],
         "custom": {
           "regex": "^I[A-Z]",
           "match": true
@@ -39,7 +41,15 @@
     "no-shadow": "off",
     "no-console": "off",
     "no-useless-constructor": "off",
-    "no-empty-function": "off",
+    "no-empty-function": [
+      "error",
+      {
+        "allow": [
+          "functions",
+          "methods"
+        ]
+      }
+    ],
     "lines-between-class-members": "off",
     "import/extensions": [
       "error",
@@ -52,19 +62,34 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
-        "alphabetize": { "order": "asc", "ignoreCase": true }
+        "groups": [
+          "module",
+          "/^@shared/",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
       }
     ],
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/*.spec.js"] }
+      {
+        "devDependencies": [
+          "**/*.spec.js"
+        ]
+      }
     ],
     "prettier/prettier": "error"
   },
   "settings": {
-      "import/resolver": {
-          "typescript": {}
-      }
+    "import/resolver": {
+      "typescript": {}
+    }
   }
 }
