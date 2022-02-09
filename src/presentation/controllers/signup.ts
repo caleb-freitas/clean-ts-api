@@ -4,11 +4,12 @@ import { IHttpRequest, IHttpResponse } from "../protocols/http";
 
 export class SignUpController {
   handle(httpRequest: IHttpRequest): IHttpResponse {
-    if (!httpRequest.body.name) {
-      return badRequest(new MissingParamError("name"));
-    }
-    if (!httpRequest.body.email) {
-      return badRequest(new MissingParamError("email"));
+    const requiredParams = ["name", "email"];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const field of requiredParams) {
+      if (!httpRequest.body[field]) {
+        return badRequest(new MissingParamError(field));
+      }
     }
   }
 }
