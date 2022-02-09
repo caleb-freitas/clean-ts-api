@@ -4,7 +4,7 @@ import { IHttpRequest, IHttpResponse } from "../protocols/http";
 
 export class SignUpController {
   handle(httpRequest: IHttpRequest): IHttpResponse {
-    const requiredParams = ["name", "email"];
+    const requiredParams = ["name", "email", "password"];
     // eslint-disable-next-line no-restricted-syntax
     for (const field of requiredParams) {
       if (!httpRequest.body[field]) {
