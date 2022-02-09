@@ -8,8 +8,8 @@
   "license": "ISC",
   "scripts": {
     "prepare": "husky install",
-    "test": "jest --silent --noStackTrace --passWithNoTests --coverage=false",
-    "test:staged": "jest --passWithNoTests"
+    "test": "jest --watch --silent --noStackTrace --passWithNoTests --coverage=false",
+    "test:staged": "jest --watch --silent --noStackTrace --passWithNoTests --coverage=false"
   },
   "lint-staged": {
     "*.ts": [
