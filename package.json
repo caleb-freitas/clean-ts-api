@@ -8,8 +8,12 @@
   "license": "ISC",
   "scripts": {
     "prepare": "husky install",
-    "test": "jest --watch --silent --noStackTrace --passWithNoTests --coverage=false",
-    "test:staged": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests --silent --noStackTrace --coverage=false --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:integration": "npm test -- --watch -c jest-integration-config.js",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage"
   },
   "lint-staged": {
     "*.ts": [
