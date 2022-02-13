@@ -1,3 +1,5 @@
+import { rejects } from "assert";
+
 import { IAddAccount } from "../../../domain/usecases/add-account";
 import { IEncrypter } from "../../protocols/encrypter";
 import { DbAddAccount } from "./db-add-account";
@@ -36,5 +38,21 @@ describe("DbAddAccount Usecase", () => {
     };
     await sut.add(accountData);
     expect(encryptSpy).toHaveBeenCalledWith("valid_password");
+  });
+
+  test("should throw if Encryper throws", async () => {
+    const { sut, encrypterStub } = makeSut();
+    const encryptSpy = jest
+      .spyOn(encrypterStub, "encrypt")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      );
+    const accountData = {
+      name: "valid_name",
+      email: "valid@mail.com",
+      password: "valid_password",
+    };
+    const promise = sut.add(accountData);
+    expect(promise).rejects.toThrow();
   });
 });
