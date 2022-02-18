@@ -4,3 +4,4 @@ coverage
 diagrams
 globalConfig.json
 .env
+prisma/migrations
