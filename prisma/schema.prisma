@@ -15,3 +15,11 @@ model Accounts {
 
   @@map("accounts")
 }
+
+model Errors {
+  id         String   @id @default(uuid())
+  stack      String
+  created_at DateTime @default(now())
+
+  @@map("errors")
+}
