@@ -2,19 +2,19 @@
 
 ## Project
 
-In progres...
+In progress...
 
 This project allows satisfaction surveys to be carried out.
 
 ## How to execute
+
+Obs.: you need a running postgres database with the correct permissions inserted on the `.env` file to the migration command executes with success
 
 - Clone the repository
 - Go to the folder that was cloned `cd clean-ts-api`
 - Run `npm install` to install the dependencies
 - Run `npx prisma migrate dev` to create the tables on the database
 - Run `npm run start` to start the server
-
-Obs.: you need a running postgres database with the correct permitions inserted on the .env file to the migration commad executes with success
 
 The application will be available on `http://localhost:5050`
 
