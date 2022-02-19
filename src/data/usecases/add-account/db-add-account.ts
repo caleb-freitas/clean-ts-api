@@ -8,7 +8,7 @@ import {
 
 export class DbAddAccount implements IAddAccount {
   private readonly encrypter: IEncrypter;
-  private readonly addAccountRepository;
+  private readonly addAccountRepository: IAddAccountRepository;
 
   constructor(
     encrypter: IEncrypter,
