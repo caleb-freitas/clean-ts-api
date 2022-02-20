@@ -1,6 +1,10 @@
 import { IAuthentication } from "../../../domain/usecases/authentication";
 import { InvalidParamError, MissingParamError } from "../../errors";
-import { badRequest, serverError } from "../../helpers/http-helper";
+import {
+  badRequest,
+  serverError,
+  unauthorized,
+} from "../../helpers/http-helper";
 import { IEmailValidator, IHttpRequest } from "../signup/signup-protocols";
 import { LoginController } from "./login";
 
@@ -21,7 +25,7 @@ const makeEmailValidator = (): IEmailValidator => {
 
 const makeAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {
-    async auth(email: string, password: string): Promise<string> {
+    async auth(email: string, password: string): Promise<string | null> {
       return new Promise((resolve) => resolve("token"));
     }
   }
@@ -83,7 +87,7 @@ describe("LoginController", () => {
     expect(isValidSpy).toHaveBeenCalledWith("any@mail.com");
   });
 
-  test("should return 500 if EmailValidator theows", async () => {
+  test("should return 500 if EmailValidator throws", async () => {
     const { sut, emailValidatorStub } = makeSut();
     jest.spyOn(emailValidatorStub, "isValid").mockImplementationOnce(() => {
       throw new Error();
@@ -97,5 +101,14 @@ describe("LoginController", () => {
     const authSpy = jest.spyOn(authenticationStub, "auth");
     await sut.handle(makeFakeRequest());
     expect(authSpy).toHaveBeenCalledWith("any@mail.com", "any_password");
+  });
+
+  test("should return 401 if invalid credentials are provided", async () => {
+    const { sut, authenticationStub } = makeSut();
+    jest
+      .spyOn(authenticationStub, "auth")
+      .mockReturnValueOnce(new Promise((resolve) => resolve(null)));
+    const httpResponse = await sut.handle(makeFakeRequest());
+    expect(httpResponse).toEqual(unauthorized());
   });
 });
