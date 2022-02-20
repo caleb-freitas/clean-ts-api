@@ -19,21 +19,16 @@ export class LoginController implements IController {
   async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const { email, password } = httpRequest.body;
     try {
-      if (!email) {
-        return new Promise((resolve) =>
-          resolve(badRequest(new MissingParamError("email")))
-        );
+      const requiredParams = ["email", "password"];
+      // eslint-disable-next-line no-restricted-syntax
+      for (const field of requiredParams) {
+        if (!httpRequest.body[field]) {
+          return badRequest(new MissingParamError(field));
+        }
       }
-      if (!password) {
-        return new Promise((resolve) =>
-          resolve(badRequest(new MissingParamError("password")))
-        );
-      }
-      const isValid = this.emailValidator.isValid(email);
-      if (!isValid) {
-        return new Promise((resolve) =>
-          resolve(badRequest(new InvalidParamError("email")))
-        );
+      const emailIsValid = this.emailValidator.isValid(email);
+      if (!emailIsValid) {
+        return badRequest(new InvalidParamError("email"));
       }
       await this.authentication.auth(email, password);
       return new Promise((resolve) =>
