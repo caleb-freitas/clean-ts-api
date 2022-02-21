@@ -6,6 +6,7 @@ import { SignUpController } from "../../presentation/controllers/signup/signup";
 import { IController } from "../../presentation/protocols";
 import { EmailValidatorAdapter } from "../../utils/email-validator-adapter";
 import { LogControllerDecorator } from "../decorators/log";
+import { makeSignUpValidation } from "./signup-validation";
 
 export const makeSignUpController = (): IController => {
   const salt = 12;
@@ -14,6 +15,10 @@ export const makeSignUpController = (): IController => {
   const accountPrismaRepository = new AccountPrismaRepository();
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountPrismaRepository);
   const logPrismaRepository = new LogPrismaRepository();
-  const signUpController = new SignUpController(emailValidator, dbAddAccount);
+  const signUpController = new SignUpController(
+    emailValidator,
+    dbAddAccount,
+    makeSignUpValidation()
+  );
   return new LogControllerDecorator(signUpController, logPrismaRepository);
 };
