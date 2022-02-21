@@ -21,6 +21,7 @@
     "prettier"
   ],
   "rules": {
+    "no-restricted-syntax": "off",
     "consistent-return": "off",
     "max-classes-per-file": "off",
     "no-promise-executor-return": "off",
