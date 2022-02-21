@@ -4,19 +4,16 @@ import { AccountPrismaRepository } from "../../infra/db/prisma/account-repositor
 import { LogPrismaRepository } from "../../infra/db/prisma/log-repository/log";
 import { SignUpController } from "../../presentation/controllers/signup/signup";
 import { IController } from "../../presentation/protocols";
-import { EmailValidatorAdapter } from "../../utils/email-validator-adapter";
 import { LogControllerDecorator } from "../decorators/log";
 import { makeSignUpValidation } from "./signup-validation";
 
 export const makeSignUpController = (): IController => {
   const salt = 12;
-  const emailValidator = new EmailValidatorAdapter();
   const bcryptAdapter = new BcryptAdapter(salt);
   const accountPrismaRepository = new AccountPrismaRepository();
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountPrismaRepository);
   const logPrismaRepository = new LogPrismaRepository();
   const signUpController = new SignUpController(
-    emailValidator,
     dbAddAccount,
     makeSignUpValidation()
   );
