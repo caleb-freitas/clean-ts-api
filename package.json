@@ -9,7 +9,7 @@
   "scripts": {
     "start": "sucrase-node src/main/server.ts",
     "prepare": "husky install",
-    "test": "jest --passWithNoTests --silent --noStackTrace --coverage=false --runInBand",
+    "test": "jest --passWithNoTests --silent --noStackTrace --coverage=false --runInBand --detectOpenHandles",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
