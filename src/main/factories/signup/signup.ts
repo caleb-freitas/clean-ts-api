@@ -1,10 +1,10 @@
-import { DbAddAccount } from "../../data/usecases/add-account/db-add-account";
-import { BcryptAdapter } from "../../infra/criptography/bcrypt-adapter";
-import { AccountPrismaRepository } from "../../infra/db/prisma/account-repository/account";
-import { LogPrismaRepository } from "../../infra/db/prisma/log-repository/log";
-import { SignUpController } from "../../presentation/controllers/signup/signup";
-import { IController } from "../../presentation/protocols";
-import { LogControllerDecorator } from "../decorators/log";
+import { DbAddAccount } from "../../../data/usecases/add-account/db-add-account";
+import { BcryptAdapter } from "../../../infra/criptography/bcrypt-adapter";
+import { AccountPrismaRepository } from "../../../infra/db/prisma/account-repository/account";
+import { LogPrismaRepository } from "../../../infra/db/prisma/log-repository/log";
+import { SignUpController } from "../../../presentation/controllers/signup/signup";
+import { IController } from "../../../presentation/protocols";
+import { LogControllerDecorator } from "../../decorators/log";
 import { makeSignUpValidation } from "./signup-validation";
 
 export const makeSignUpController = (): IController => {

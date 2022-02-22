@@ -1,4 +1,3 @@
-import { InvalidParamError, MissingParamError } from "../../errors";
 import {
   badRequest,
   ok,
@@ -9,35 +8,25 @@ import {
   IController,
   IHttpRequest,
   IHttpResponse,
-  IEmailValidator,
   IAuthentication,
+  IValidation,
 } from "./login-protocols";
 
 export class LoginController implements IController {
-  private readonly emailValidator: IEmailValidator;
+  private readonly validation: IValidation;
   private readonly authentication: IAuthentication;
 
-  constructor(
-    emailValidator: IEmailValidator,
-    authentication: IAuthentication
-  ) {
-    this.emailValidator = emailValidator;
+  constructor(authentication: IAuthentication, validation: IValidation) {
+    this.validation = validation;
     this.authentication = authentication;
   }
 
   async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const { email, password } = httpRequest.body;
     try {
-      const requiredParams = ["email", "password"];
-      // eslint-disable-next-line no-restricted-syntax
-      for (const field of requiredParams) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new MissingParamError(field));
-        }
-      }
-      const emailIsValid = this.emailValidator.isValid(email);
-      if (!emailIsValid) {
-        return badRequest(new InvalidParamError("email"));
+      const error = this.validation.validate(httpRequest.body);
+      if (error) {
+        return badRequest(error);
       }
       const accessToken = await this.authentication.auth(email, password);
       if (!accessToken) {
