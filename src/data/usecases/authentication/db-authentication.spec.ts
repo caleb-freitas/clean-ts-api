@@ -107,7 +107,7 @@ describe("DbAuthentication UseCase", () => {
     await expect(promise).rejects.toThrow();
   });
 
-  test("should return null if HashCompare returns", async () => {
+  test("should return null if HashCompare returns false", async () => {
     const { sut, hashCompareStub } = makeSut();
     jest
       .spyOn(hashCompareStub, "compare")
@@ -132,5 +132,11 @@ describe("DbAuthentication UseCase", () => {
       );
     const promise = sut.auth(makeFakeAuthentication());
     await expect(promise).rejects.toThrow();
+  });
+
+  test("should returns a token on success", async () => {
+    const { sut } = makeSut();
+    const accessToken = await sut.auth(makeFakeAuthentication());
+    expect(accessToken).toBe("token");
   });
 });
