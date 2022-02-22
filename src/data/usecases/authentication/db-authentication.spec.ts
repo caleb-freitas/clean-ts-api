@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { IAuthenticationModel } from "../../../domain/usecases/authentication";
-import { IHashCompare } from "../../protocols/cryptography/hash-compare";
-import { ITokenGenerator } from "../../protocols/cryptography/token-generator";
-import { ILoadAccountByEmailRepository } from "../../protocols/db/load-account-by-email-repository";
-import { IUpdateAccessTokenRepository } from "../../protocols/db/update-access-token-repository";
-import { IAccountModel } from "../add-account/db-add-account-protocols";
 import { DbAuthentication } from "./db-authentication";
+import {
+  IAccountModel,
+  IAuthenticationModel,
+  IHashCompare,
+  ILoadAccountByEmailRepository,
+  ITokenGenerator,
+  IUpdateAccessTokenRepository,
+} from "./db-authentication-protocols";
 
 const makeFakeAccount = (): IAccountModel => ({
   id: "any_id",
