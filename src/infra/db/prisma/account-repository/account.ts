@@ -1,9 +1,12 @@
 import { IAddAccountRepository } from "../../../../data/protocols/db/add-account-repository";
+import { ILoadAccountByEmailRepository } from "../../../../data/protocols/db/load-account-by-email-repository";
 import { IAccountModel } from "../../../../domain/models/account";
 import { IAddAccountModel } from "../../../../domain/usecases/add-account";
 import { prisma } from "../client/prisma-client";
 
-export class AccountPrismaRepository implements IAddAccountRepository {
+export class AccountPrismaRepository
+  // eslint-disable-next-line prettier/prettier
+  implements IAddAccountRepository, ILoadAccountByEmailRepository {
   async add(accountData: IAddAccountModel): Promise<IAccountModel> {
     const { name, email, password } = accountData;
     const account = await prisma.accounts.create({
@@ -11,6 +14,15 @@ export class AccountPrismaRepository implements IAddAccountRepository {
         name,
         email,
         password,
+      },
+    });
+    return account;
+  }
+
+  async loadByEmail(email: string): Promise<IAccountModel | null> {
+    const account = await prisma.accounts.findFirst({
+      where: {
+        email,
       },
     });
     return account;
