@@ -6,12 +6,12 @@ import {
   unauthorized,
 } from "../../helpers/http/http-helper";
 import { IValidation } from "../signup/signup-protocols";
-import { LoginController } from "./login";
+import { LoginController } from "./login-controller";
 import {
   IHttpRequest,
   IAuthentication,
   IAuthenticationModel,
-} from "./login-protocols";
+} from "./login-controller-protocols";
 
 interface ISutTypes {
   sut: LoginController;
