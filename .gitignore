@@ -5,3 +5,4 @@ diagrams
 globalConfig.json
 .env
 prisma/migrations/
+**/config/env.ts
