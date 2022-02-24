@@ -10,8 +10,8 @@ describe("Login Routes", () => {
       await request(app)
         .post("/api/signup")
         .send({
-          name: "caleb",
-          email: "calebfreitas@tutanota.com",
+          name: "user",
+          email: "user@mail.com",
           password: "123456",
           passwordConfirmation: "123456",
         })
@@ -24,18 +24,28 @@ describe("Login Routes", () => {
       const password = await hash("123456", 12);
       await prisma.accounts.create({
         data: {
-          name: "caleb",
-          email: "calebfreitas@tutanota.com",
+          name: "user",
+          email: "user@mail.com",
           password,
         },
       });
       await request(app)
         .post("/api/login")
         .send({
-          email: "calebfreitas@tutanota.com",
+          email: "user@mail.com",
           password: "123456",
         })
         .expect(200);
+    });
+
+    test("should return 401 on login", async () => {
+      await request(app)
+        .post("/api/login")
+        .send({
+          email: "invalid_user@mail.com",
+          password: "123456",
+        })
+        .expect(401);
     });
   });
 });
