@@ -1,5 +1,5 @@
 import { DbAddAccount } from "../../../data/usecases/add-account/db-add-account";
-import { BcryptAdapter } from "../../../infra/criptography/bcrypt-adapter";
+import { BcryptAdapter } from "../../../infra/criptography/bcrypt-adapter/bcrypt-adapter";
 import { AccountPrismaRepository } from "../../../infra/db/prisma/account-repository/account";
 import { LogPrismaRepository } from "../../../infra/db/prisma/log-repository/log";
 import { SignUpController } from "../../../presentation/controllers/signup/signup";
