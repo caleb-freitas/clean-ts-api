@@ -10,7 +10,7 @@ export class JwtAdapter implements IEncrypter {
   }
 
   async encrypt(value: string): Promise<string> {
-    await jwt.sign({ id: value }, this.secret);
-    return new Promise((resolve) => resolve(""));
+    const accessToken = jwt.sign({ id: value }, this.secret);
+    return accessToken;
   }
 }
