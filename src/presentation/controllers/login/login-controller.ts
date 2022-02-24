@@ -10,16 +10,13 @@ import {
   IHttpResponse,
   IAuthentication,
   IValidation,
-} from "./login-protocols";
+} from "./login-controller-protocols";
 
 export class LoginController implements IController {
-  private readonly validation: IValidation;
-  private readonly authentication: IAuthentication;
-
-  constructor(authentication: IAuthentication, validation: IValidation) {
-    this.validation = validation;
-    this.authentication = authentication;
-  }
+  constructor(
+    private readonly authentication: IAuthentication,
+    private readonly validation: IValidation
+  ) {}
 
   async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const { email, password } = httpRequest.body;

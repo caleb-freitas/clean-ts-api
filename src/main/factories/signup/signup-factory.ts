@@ -1,11 +1,11 @@
 import { DbAddAccount } from "../../../data/usecases/add-account/db-add-account";
 import { BcryptAdapter } from "../../../infra/criptography/bcrypt-adapter/bcrypt-adapter";
-import { AccountPrismaRepository } from "../../../infra/db/prisma/account-repository/account";
-import { LogPrismaRepository } from "../../../infra/db/prisma/log-repository/log";
-import { SignUpController } from "../../../presentation/controllers/signup/signup";
+import { AccountPrismaRepository } from "../../../infra/db/prisma/account/account-prisma-repository";
+import { LogPrismaRepository } from "../../../infra/db/prisma/log/log-prisma-repository";
+import { SignUpController } from "../../../presentation/controllers/signup/signup-controller";
 import { IController } from "../../../presentation/protocols";
-import { LogControllerDecorator } from "../../decorators/log";
-import { makeSignUpValidation } from "./signup-validation";
+import { LogControllerDecorator } from "../../decorators/log-controller-decorator";
+import { makeSignUpValidation } from "./signup-validation-factory";
 
 export const makeSignUpController = (): IController => {
   const salt = 12;

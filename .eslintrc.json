@@ -49,8 +49,7 @@
       "error",
       {
         "allow": [
-          "functions",
-          "methods"
+          "constructors"
         ]
       }
     ],

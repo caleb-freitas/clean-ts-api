@@ -8,10 +8,10 @@ This project allows satisfaction surveys to be carried out.
 
 ## How to execute
 
-Obs.: you need a running postgres database with the correct permissions inserted on the `.env` file to the migration command executes with success
-
 - Clone the repository
 - Go to the folder that was cloned `cd clean-ts-api`
+- Add the database credentials to `.env.example` file and rename it to just `.env`
+- Add JWT secret key on file [env-example.ts](src/main/config/env-example.ts) and rename it to just `env.ts`
 - Run `npm install` to install the dependencies
 - Run `npx prisma migrate dev` to create the tables on the database
 - Run `npm run start` to start the server
