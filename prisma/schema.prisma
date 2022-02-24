@@ -8,10 +8,11 @@ datasource db {
 }
 
 model Accounts {
-  id       String @id @default(uuid())
-  name     String
-  email    String
-  password String
+  id           String  @id @default(uuid())
+  name         String
+  email        String
+  password     String
+  access_token String?
 
   @@map("accounts")
 }
