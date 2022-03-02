@@ -11,7 +11,7 @@ describe("Login Routes", () => {
         .post("/api/signup")
         .send({
           name: "user",
-          email: "user@mail.com",
+          email: "user1@mail.com",
           password: "123456",
           passwordConfirmation: "123456",
         })
@@ -25,20 +25,20 @@ describe("Login Routes", () => {
       await prisma.accounts.create({
         data: {
           name: "user",
-          email: "user@mail.com",
+          email: "user2@mail.com",
           password,
         },
       });
       await request(app)
         .post("/api/login")
         .send({
-          email: "user@mail.com",
+          email: "user2@mail.com",
           password: "123456",
         })
         .expect(200);
     });
 
-    test("should return 401 on login", async () => {
+    test("should return 401 on login with invalid credentials", async () => {
       await request(app)
         .post("/api/login")
         .send({
