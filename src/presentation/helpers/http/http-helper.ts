@@ -7,8 +7,13 @@ export const badRequest = (error: Error): IHttpResponse => ({
 });
 
 export const unauthorized = (): IHttpResponse => ({
-  statusCode: 401,
+  statusCode: 403,
   body: new UnauthorizedError(),
+});
+
+export const forbidden = (error: Error): IHttpResponse => ({
+  statusCode: 400,
+  body: error,
 });
 
 export const serverError = (error: Error): IHttpResponse => ({

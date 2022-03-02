@@ -1,4 +1,10 @@
-import { badRequest, ok, serverError } from "../../helpers/http/http-helper";
+import { EmailInUseError } from "../../errors";
+import {
+  badRequest,
+  forbidden,
+  ok,
+  serverError,
+} from "../../helpers/http/http-helper";
 import {
   IHttpResponse,
   IHttpRequest,
@@ -27,6 +33,9 @@ export class SignUpController implements IController {
         email,
         password,
       });
+      if (!account) {
+        return forbidden(new EmailInUseError());
+      }
       const accessToken = await this.authentication.auth({ email, password });
       return ok({ accessToken });
     } catch (error) {
