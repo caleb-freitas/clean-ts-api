@@ -1,5 +1,10 @@
-import { MissingParamError, ServerError } from "../../errors";
-import { badRequest, ok, serverError } from "../../helpers/http/http-helper";
+import { EmailInUseError, MissingParamError, ServerError } from "../../errors";
+import {
+  badRequest,
+  forbidden,
+  ok,
+  serverError,
+} from "../../helpers/http/http-helper";
 import { SignUpController } from "./signup-controller";
 import {
   IAddAccount,
@@ -151,5 +156,12 @@ describe("SignUp Controller", () => {
       );
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(serverError(new Error()));
+  });
+
+  test("should return 403 if AddAccount returns null", async () => {
+    const { sut, addAccountStub } = makeSut();
+    jest.spyOn(addAccountStub, "add").mockReturnValueOnce(null as never);
+    const httpResponse = await sut.handle(makeFakeRequest());
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()));
   });
 });
