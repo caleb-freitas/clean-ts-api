@@ -5,12 +5,14 @@ import {
   IController,
   IAddAccount,
   IValidation,
+  IAuthentication,
 } from "./signup-protocols";
 
 export class SignUpController implements IController {
   constructor(
     private readonly addAccount: IAddAccount,
-    private readonly validation: IValidation
+    private readonly validation: IValidation,
+    private readonly authentication: IAuthentication
   ) {}
 
   async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
@@ -25,7 +27,8 @@ export class SignUpController implements IController {
         email,
         password,
       });
-      return ok(account);
+      const accessToken = await this.authentication.auth({ email, password });
+      return ok({ accessToken });
     } catch (error) {
       return serverError(error);
     }
