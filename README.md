@@ -28,3 +28,4 @@ The project is being developed with the following technologies:
 - [Express](https://expressjs.com/pt-br/)
 - [Prisma](https://www.prisma.io/)
 - [Jest](https://jestjs.io/)
+- [PostgreSQL](https://www.postgresql.org/)
