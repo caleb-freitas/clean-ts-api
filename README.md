@@ -2,9 +2,9 @@
 
 ## Project
 
-This project is temporarily paused.
+This project is temporarily paused
 
-This project allows satisfaction surveys to be carried out.
+This project allows satisfaction surveys to be carried out
 
 ## How to execute
 
