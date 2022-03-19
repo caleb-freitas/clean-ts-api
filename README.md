@@ -2,7 +2,7 @@
 
 ## Project
 
-In progress...
+This project is temporarily paused.
 
 This project allows satisfaction surveys to be carried out.
 
@@ -13,6 +13,7 @@ This project allows satisfaction surveys to be carried out.
 - Add the database credentials to `.env.example` file and rename it to just `.env`
 - Add JWT secret key on file [env-example.ts](src/main/config/env-example.ts) and rename it to just `env.ts`
 - Run `npm install` to install the dependencies
+- Start a database on `localhost:5432`
 - Run `npx prisma migrate dev` to create the tables on the database
 - Run `npm run start` to start the server
 
